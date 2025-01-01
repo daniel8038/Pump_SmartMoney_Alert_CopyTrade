@@ -1,6 +1,5 @@
-import { TokenBalance } from "@triton-one/yellowstone-grpc/dist/grpc/solana-storage";
 import bs58 from "bs58";
-import { MessageTemplateParam } from "../types/env";
+
 import {
   Account,
   createAssociatedTokenAccountInstruction,
@@ -10,9 +9,18 @@ import {
   TokenAccountNotFoundError,
   TokenInvalidAccountOwnerError,
 } from "@solana/spl-token";
-import { Connection, Keypair, PublicKey, Transaction } from "@solana/web3.js";
-const formatBuffer = (signature: Uint8Array | number[]): string => {
-  return bs58.encode(signature);
+import {
+  Connection,
+  Keypair,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+  Transaction,
+} from "@solana/web3.js";
+import { BN } from "@coral-xyz/anchor";
+import { TokenBalance } from "@triton-one/yellowstone-grpc/dist/grpc/solana-storage.js";
+import { MessageTemplateParam } from "../types/env.js";
+const wait = async (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 };
 /**
  * 获取token账户以及账户索引
@@ -72,6 +80,9 @@ const messageTemplate = ({
   └─ 时间: ${time}
   🌐 浏览器查看: https://solscan.io/tx/${txHash}`;
 };
+const formatBuffer = (signature: Uint8Array | number[]): string => {
+  return bs58.encode(signature);
+};
 const formatDate = (date: Date = new Date()) => {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -81,6 +92,9 @@ const formatDate = (date: Date = new Date()) => {
   const seconds = String(date.getSeconds()).padStart(2, "0");
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+};
+const formatLamp = (solAmount: number): BN => {
+  return new BN(solAmount * LAMPORTS_PER_SOL);
 };
 const getTokenBalanceChange = (
   pre: TokenBalance[],
@@ -140,12 +154,23 @@ const getOrCreateAssociatedTokenAccountTransaction = async function (
     }
   }
 };
+const isValidSolanaAddress = (address: string): boolean => {
+  try {
+    new PublicKey(address);
+    return true;
+  } catch {
+    return false;
+  }
+};
 export {
-  formatBuffer,
-  getTokenMintAccount,
-  messageTemplate,
+  wait,
   formatDate,
-  getTokenBalanceChange,
+  formatLamp,
+  formatBuffer,
+  messageTemplate,
   getSolBalanceChange,
+  getTokenBalanceChange,
+  getTokenMintAccount,
   getOrCreateAssociatedTokenAccountTransaction,
+  isValidSolanaAddress,
 };

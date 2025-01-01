@@ -3,6 +3,7 @@ import {
   SubscribeUpdateTransaction,
   SubscribeUpdateTransactionInfo,
 } from "@triton-one/yellowstone-grpc";
+import { PublicKey } from "@solana/web3.js";
 import {
   formatBuffer,
   formatDate,
@@ -11,11 +12,9 @@ import {
   getTokenMintAccount,
   messageTemplate,
 } from "../utils";
-import { SMART_MONEY_MAP } from "../config";
-import { MessageTemplateParam } from "../types/env";
-import { sendToTelegram } from "../tg/bot";
-import { PublicKey } from "@solana/web3.js";
+import { MessageTemplateParam } from "../types/env.js";
 import { buyToken } from "./pump/buyToken";
+import { addressManager } from "../addressManager";
 //
 let isStopped = false;
 export default async function handleData(data: SubscribeUpdate) {
@@ -52,6 +51,7 @@ export default async function handleData(data: SubscribeUpdate) {
     data.transaction.transaction?.transaction?.message?.accountKeys.map(
       (account) => formatBuffer(account)
     )!;
+  const SMART_MONEY_MAP = await addressManager.getAddressMap();
   const smartMoneyName = SMART_MONEY_MAP[accountKeys[0]];
   const smartMoneyAddress = accountKeys[0];
 
@@ -75,6 +75,7 @@ export default async function handleData(data: SubscribeUpdate) {
         tokenPrice: "testPrice",
       };
       const alertMessage = messageTemplate(alertMessageParams);
+      console.log(alertMessage);
       // await sendToTelegram(alertMessage);
       await buyToken(new PublicKey(tokenMintAccount), 0.01, 30);
       isStopped = false;
@@ -97,12 +98,15 @@ export default async function handleData(data: SubscribeUpdate) {
         tokenPrice: "testPrice",
       };
       const alertMessage = messageTemplate(alertMessageParams);
+      console.log(alertMessage);
       // await sendToTelegram(alertMessage);
       // 跟单
 
       isStopped = false;
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error("出错", error);
+  }
 }
 
 // Helper

@@ -1,17 +1,40 @@
-import Client from "@triton-one/yellowstone-grpc";
-import { GRPC_URL_MAIN, GRPC_URL_TEST, subRequestConfig } from "./config";
+import Client, {
+  CommitmentLevel,
+  SubscribeRequest,
+} from "@triton-one/yellowstone-grpc";
+import { GRPC_URL_MAIN, PUMP_FUN_PROGRAM_ID } from "./config";
 import {
   handleStreamEvent,
   handleStreamPingPong,
   sendSubscribeRequest,
 } from "./stream";
-import "./tg/bot";
+import { addressManager } from "./addressManager";
+
 async function main(): Promise<void> {
   const client = new Client(GRPC_URL_MAIN, undefined, {
     "grpc.max_receive_message_length": 16 * 1024 * 1024,
   });
   const stream = await client.subscribe();
+  const SMART_ADDRESS_ARRAY = await addressManager.getAddressArray();
   try {
+    const subRequestConfig: SubscribeRequest = {
+      accounts: {},
+      slots: {},
+      transactions: {
+        pumpFun: {
+          accountInclude: SMART_ADDRESS_ARRAY,
+          accountExclude: [],
+          accountRequired: [PUMP_FUN_PROGRAM_ID],
+          failed: false,
+        },
+      },
+      transactionsStatus: {},
+      blocks: {},
+      blocksMeta: {},
+      entry: {},
+      accountsDataSlice: [],
+      commitment: CommitmentLevel.CONFIRMED,
+    };
     await sendSubscribeRequest(stream, subRequestConfig);
     await handleStreamEvent(stream);
     await handleStreamPingPong(stream);

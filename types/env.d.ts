@@ -10,7 +10,15 @@ declare global {
       TG_CHAT_ID: string;
       TG_MESSAGE_THREAD_ID: string;
       RPC_ENDPOINT: string;
-      PRAVITE_KEY: string;
+      PRIVATE_KEY: string;
+      TWITTER_ACCESS_TOKEN: string;
+      TWITTER_ACCESS_TOKEN_SECRET: string;
+      TWITTER_API_KEY: string;
+      TWITTER_API_SECRET: string;
+      TWITTER_BEARER_TOKEN: string;
+      OPENAI_API_KEY: string;
+      Grok_API_KEY: string;
+      IS_JITO: boolean;
     }
   }
 }

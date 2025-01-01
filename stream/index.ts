@@ -4,6 +4,7 @@ import {
 } from "@triton-one/yellowstone-grpc";
 import { ClientDuplexStream } from "@grpc/grpc-js";
 import handleData from "../strategy/handleData";
+
 /**
  * 订阅数据
  * @param stream 流
