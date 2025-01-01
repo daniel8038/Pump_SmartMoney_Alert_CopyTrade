@@ -1,6 +1,16 @@
 import { TokenBalance } from "@triton-one/yellowstone-grpc/dist/grpc/solana-storage";
 import bs58 from "bs58";
 import { MessageTemplateParam } from "../types/env";
+import {
+  Account,
+  createAssociatedTokenAccountInstruction,
+  getAccount,
+  getAssociatedTokenAddress,
+  getAssociatedTokenAddressSync,
+  TokenAccountNotFoundError,
+  TokenInvalidAccountOwnerError,
+} from "@solana/spl-token";
+import { Connection, Keypair, PublicKey, Transaction } from "@solana/web3.js";
 const formatBuffer = (signature: Uint8Array | number[]): string => {
   return bs58.encode(signature);
 };
@@ -43,23 +53,24 @@ const messageTemplate = ({
   txHash,
   slot,
   time,
+  tokenPrice,
+  tokenMarketCap,
 }: MessageTemplateParam) => {
   return `
 🔔 ${type === "BUY" ? "🟢" : "🔴"}  ━━智能钱包监控提醒 ━━
-
-👤 操作者: ${smartMoneyName} (${smartMoneyAddress})
-💫 操作类型: ${type === "BUY" ? "买入 🟢" : "卖出 🔴"}
-💰 交易金额: ${solAmount} SOL
-💎 代币: ${tokenName}
-💎 代币地址: ${tokenMintAccount}
-💎 代币数量: ${tokenAmount}
-
-🎯 交易详情
-├─ 交易哈希: ${txHash}
-├─ slot: ${slot}
-└─ 买入时间: ${time}
-
-🌐 浏览器查看: https://solscan.io/tx/${txHash}`;
+  👤 操作者: ${smartMoneyName} (${smartMoneyAddress})
+  💫 操作类型: ${type === "BUY" ? "买入 🟢" : "卖出 🔴"}
+  💰 交易金额: ${solAmount} SOL
+  💎 代币名称: ${tokenName}
+  💎 代币地址: ${tokenMintAccount}
+  💎 代币数量: ${tokenAmount}
+  💎 代币价格: ${tokenPrice}
+  💎 代币市值: ${tokenMarketCap}
+  🎯 交易详情
+  ├─ 交易哈希: ${txHash}
+  ├─ slot: ${slot}
+  └─ 时间: ${time}
+  🌐 浏览器查看: https://solscan.io/tx/${txHash}`;
 };
 const formatDate = (date: Date = new Date()) => {
   const year = date.getFullYear();
@@ -98,6 +109,37 @@ const getSolBalanceChange = (
   const change = (Number(postBalance) - Number(preSolBalance)) / 10 ** 9;
   return change.toFixed(4);
 };
+const getOrCreateAssociatedTokenAccountTransaction = async function (
+  connection: Connection,
+  publicKeyAddress: PublicKey,
+  tokenMintAccount: PublicKey,
+  keypair: Keypair,
+  transaction: Transaction
+): Promise<Account | void> {
+  let account: Account;
+  try {
+    account = await getAccount(connection, publicKeyAddress, "finalized");
+    return account;
+  } catch (error: unknown) {
+    if (
+      error instanceof TokenAccountNotFoundError ||
+      error instanceof TokenInvalidAccountOwnerError
+    ) {
+      try {
+        transaction.add(
+          createAssociatedTokenAccountInstruction(
+            keypair.publicKey,
+            publicKeyAddress,
+            keypair.publicKey,
+            tokenMintAccount
+          )
+        );
+      } catch (error: unknown) {}
+    } else {
+      throw error;
+    }
+  }
+};
 export {
   formatBuffer,
   getTokenMintAccount,
@@ -105,4 +147,5 @@ export {
   formatDate,
   getTokenBalanceChange,
   getSolBalanceChange,
+  getOrCreateAssociatedTokenAccountTransaction,
 };

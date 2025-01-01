@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1",
     "@grpc/grpc-js": "^1.12.5",
+    "@solana/spl-token": "^0.4.9",
     "@solana/web3.js": "^1.98.0",
     "@triton-one/yellowstone-grpc": "^1.4.1",
     "bs58": "^6.0.0",

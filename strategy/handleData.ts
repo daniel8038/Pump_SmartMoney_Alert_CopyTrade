@@ -14,6 +14,8 @@ import {
 import { SMART_MONEY_MAP } from "../config";
 import { MessageTemplateParam } from "../types/env";
 import { sendToTelegram } from "../tg/bot";
+import { PublicKey } from "@solana/web3.js";
+import { buyToken } from "./pump/buyToken";
 //
 let isStopped = false;
 export default async function handleData(data: SubscribeUpdate) {
@@ -41,9 +43,10 @@ export default async function handleData(data: SubscribeUpdate) {
   const preSol = data.transaction?.transaction?.meta?.preBalances;
   const postSol = data.transaction?.transaction?.meta?.postBalances;
   if (!pre || !post || !preSol || !postSol) return;
-  //-
+  //
   const { tokenMintAccount, accountIndex } = getTokenMintAccount(pre);
   if (!tokenMintAccount || !accountIndex) return;
+  //
   const signature = formatBuffer(transaction.signature);
   const accountKeys =
     data.transaction.transaction?.transaction?.message?.accountKeys.map(
@@ -68,9 +71,12 @@ export default async function handleData(data: SubscribeUpdate) {
         tokenName: "testName",
         solAmount: solChange,
         tokenAmount: tokenChange,
+        tokenMarketCap: "testMC",
+        tokenPrice: "testPrice",
       };
       const alertMessage = messageTemplate(alertMessageParams);
-      await sendToTelegram(alertMessage);
+      // await sendToTelegram(alertMessage);
+      await buyToken(new PublicKey(tokenMintAccount), 0.01, 30);
       isStopped = false;
     }
     if (type === "SELL") {
@@ -87,9 +93,13 @@ export default async function handleData(data: SubscribeUpdate) {
         tokenName: "testName",
         solAmount: solChange,
         tokenAmount: tokenChange,
+        tokenMarketCap: "testMC",
+        tokenPrice: "testPrice",
       };
       const alertMessage = messageTemplate(alertMessageParams);
-      await sendToTelegram(alertMessage);
+      // await sendToTelegram(alertMessage);
+      // 跟单
+
       isStopped = false;
     }
   } catch (error) {}
