@@ -1,15 +1,4 @@
 {
-  "include": [
-    "twitter",
-    "types",
-    "IDL",
-    "openai",
-    "utils",
-    "bot",
-    "stream",
-    "strategy",
-    "config"
-  ],
   "exclude": ["node_modules"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */

@@ -15,7 +15,7 @@ const generate_text = async (twitterContent: string) => {
     messages: [
       {
         role: "system",
-        content: ``,
+        content: `根据信息整理出关于代币的信息`,
       },
       {
         role: "user",

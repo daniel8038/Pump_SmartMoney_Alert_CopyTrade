@@ -19,6 +19,7 @@ declare global {
       OPENAI_API_KEY: string;
       Grok_API_KEY: string;
       IS_JITO: boolean;
+      JITO_FEE: number;
     }
   }
 }

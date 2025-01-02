@@ -1,7 +1,7 @@
 import { CommandContext, Context } from "grammy";
 import { isValidSolanaAddress } from "../../../../utils";
 import { searchLatestTweet } from "../../../../twitter";
-
+import { generate_text } from "../../../../openai";
 export const searchTokenInTwitter = async (ctx: CommandContext<Context>) => {
   try {
     // 获取命令后的参数
@@ -13,8 +13,8 @@ export const searchTokenInTwitter = async (ctx: CommandContext<Context>) => {
       return;
     }
     const data = await searchLatestTweet(address);
-    console.log(data);
-    await ctx.reply(address!, {
+    const info = await generate_text(data);
+    await ctx.reply(info!, {
       message_thread_id: ctx.message!.message_thread_id,
     });
   } catch (e) {

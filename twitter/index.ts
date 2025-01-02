@@ -27,9 +27,9 @@ async function searchLatestTweet(queryKey: string): Promise<any> {
       sort_order: "recency",
     });
     if (!tweets?.data?.data?.length || tweets.data.meta.result_count === 0) {
-      return "没有检索到信息";
+      return "";
     }
-    return tweets?.data?.data.map((value) => ({ text: value.text }));
+    return tweets?.data?.data.map((value) => ({ text: value.text })).toString();
   } catch (error) {
     console.error("Twitter search error:", error);
     throw new Error(`搜索推文出错：${error}`);
