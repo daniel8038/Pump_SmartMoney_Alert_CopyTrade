@@ -77,7 +77,7 @@ export default async function handleData(data: SubscribeUpdate) {
       const alertMessage = messageTemplate(alertMessageParams);
       console.log(alertMessage);
       // await sendToTelegram(alertMessage);
-      await buyToken(new PublicKey(tokenMintAccount), 0.01, 30);
+      // await buyToken(new PublicKey(tokenMintAccount), 0.01, 30);
       isStopped = false;
     }
     if (type === "SELL") {

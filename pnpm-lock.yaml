@@ -37,7 +37,7 @@ importers:
         version: 16.4.7
       grammy:
         specifier: ^1.33.0
-        version: 1.33.0
+        version: 1.34.0
       openai:
         specifier: ^4.77.0
         version: 4.77.0
@@ -47,10 +47,10 @@ importers:
     devDependencies:
       '@types/node':
         specifier: ^22.10.3
-        version: 22.10.3
+        version: 22.10.4
       ts-node:
         specifier: ^10.9.2
-        version: 10.9.2(@types/node@22.10.3)(typescript@5.7.2)
+        version: 10.9.2(@types/node@22.10.4)(typescript@5.7.2)
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -79,8 +79,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@grammyjs/types@3.17.0':
-    resolution: {integrity: sha512-e8AR3xQwRAFX248E7Qw/7mIu1OzvoXloJzOBJVtuPKzzL7tGkn5trZAdZUBgGViVQg5ZwVS/x9N2nRrcyH/DfA==}
+  '@grammyjs/types@3.18.0':
+    resolution: {integrity: sha512-/VpQcT6Z0+Lw6H6jv2JvnDmqB1/9rjbFdDBlPBPUW3kQ1bWfjzfaiVk2+J2eiid3o3sLaPp3ZK0XjEI1gWNc3g==}
 
   '@grpc/grpc-js@1.12.5':
     resolution: {integrity: sha512-d3iiHxdpg5+ZcJ6jnDSOT8Z0O0VMVGy34jAnYLUX8yd36b1qn8f1TwOA/Lc7TsOh03IkPJ38eGI5qD2EjNkoEA==}
@@ -104,16 +104,12 @@ packages:
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
 
-  '@noble/curves@1.7.0':
-    resolution: {integrity: sha512-UTMhXK9SeDhFJVrHeUJ5uZlI6ajXg10O6Ddocf9S6GjbSBVZsJo88HzKwXznNfGpMTRDyJkqMjNDPYgf0qFWnw==}
+  '@noble/curves@1.8.0':
+    resolution: {integrity: sha512-j84kjAbzEnQHaSIhRPUmB3/eVXu2k3dKPl2LOrR8fSOIL+89U+7lV117EWHtq/GHM3ReGHM46iRBdZfpc4HRUQ==}
     engines: {node: ^14.21.3 || >=16}
 
-  '@noble/hashes@1.6.0':
-    resolution: {integrity: sha512-YUULf0Uk4/mAA89w+k3+yUYh6NrEvxZa5T6SY3wlMvE2chHkxFUUIDI8/XW1QSC357iA5pSnqt7XEhvFOqmDyQ==}
-    engines: {node: ^14.21.3 || >=16}
-
-  '@noble/hashes@1.6.1':
-    resolution: {integrity: sha512-pq5D8h10hHBjyqX+cfBm0i8JUXJ0UhczFc4r74zbuT9XgewFo2E3J1cOaGtdZynILNmQ685YWGzGE1Zv6io50w==}
+  '@noble/hashes@1.7.0':
+    resolution: {integrity: sha512-HXydb0DgzTpDPwbVeDGCG1gIu7X6+AuU6Zl6av/E/KG8LMsvPntvq+w17CHRpKBmN6Ybdrt1eP3k4cj8DJa78w==}
     engines: {node: ^14.21.3 || >=16}
 
   '@protobufjs/aspromise@1.1.2':
@@ -243,8 +239,8 @@ packages:
   '@types/node@18.19.69':
     resolution: {integrity: sha512-ECPdY1nlaiO/Y6GUnwgtAAhLNaQ53AyIVz+eILxpEo5OvuqE6yWkqWBIb5dU0DqhKQtMeny+FBD3PK6lm7L5xQ==}
 
-  '@types/node@22.10.3':
-    resolution: {integrity: sha512-DifAyw4BkrufCILvD3ucnuN8eydUfc/C1GlyrnI+LK6543w5/L3VeVgf05o3B4fqSXP1dKYLOZsKfutpxPzZrw==}
+  '@types/node@22.10.4':
+    resolution: {integrity: sha512-99l6wv4HEzBQhvaU/UGoeBoCK61SCROQaCCGyQSgX2tEQ3rKkNZ2S7CEWnS/4s1LV+8ODdK21UeyR1fHP2mXug==}
 
   '@types/uuid@8.3.4':
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
@@ -463,8 +459,8 @@ packages:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
 
-  grammy@1.33.0:
-    resolution: {integrity: sha512-kvQuIBtiPcqNGntsVevjXYBMByIJ3PtOP7swr1zbCg6xY+dNX76f4VX5auKuJNI/sflexPr3L4wNwbTJHu9ocA==}
+  grammy@1.34.0:
+    resolution: {integrity: sha512-YSLUSLdwycufB0Si9em+Ef3aXt7Vq0LYuGgwF4+ZskPb6+3RzrPdkh28qQNKhCeIXKodgMKQ5CxAHf/fLJZufg==}
     engines: {node: ^12.20.0 || >=14.13.1}
 
   humanize-ms@1.2.1:
@@ -707,7 +703,7 @@ snapshots:
     dependencies:
       '@coral-xyz/anchor-errors': 0.30.1
       '@coral-xyz/borsh': 0.30.1(@solana/web3.js@1.98.0(bufferutil@4.0.9)(utf-8-validate@5.0.10))
-      '@noble/hashes': 1.6.1
+      '@noble/hashes': 1.7.0
       '@solana/web3.js': 1.98.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)
       bn.js: 5.2.1
       bs58: 4.0.1
@@ -735,7 +731,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@grammyjs/types@3.17.0': {}
+  '@grammyjs/types@3.18.0': {}
 
   '@grpc/grpc-js@1.12.5':
     dependencies:
@@ -760,13 +756,11 @@ snapshots:
 
   '@js-sdsl/ordered-map@4.4.2': {}
 
-  '@noble/curves@1.7.0':
+  '@noble/curves@1.8.0':
     dependencies:
-      '@noble/hashes': 1.6.0
+      '@noble/hashes': 1.7.0
 
-  '@noble/hashes@1.6.0': {}
-
-  '@noble/hashes@1.6.1': {}
+  '@noble/hashes@1.7.0': {}
 
   '@protobufjs/aspromise@1.1.2': {}
 
@@ -894,8 +888,8 @@ snapshots:
   '@solana/web3.js@1.98.0(bufferutil@4.0.9)(utf-8-validate@5.0.10)':
     dependencies:
       '@babel/runtime': 7.26.0
-      '@noble/curves': 1.7.0
-      '@noble/hashes': 1.6.1
+      '@noble/curves': 1.8.0
+      '@noble/hashes': 1.7.0
       '@solana/buffer-layout': 4.0.1
       agentkeepalive: 4.6.0
       bigint-buffer: 1.1.5
@@ -931,11 +925,11 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 22.10.3
+      '@types/node': 22.10.4
 
   '@types/node-fetch@2.6.12':
     dependencies:
-      '@types/node': 22.10.3
+      '@types/node': 22.10.4
       form-data: 4.0.1
 
   '@types/node@12.20.55': {}
@@ -944,7 +938,7 @@ snapshots:
     dependencies:
       undici-types: 5.26.5
 
-  '@types/node@22.10.3':
+  '@types/node@22.10.4':
     dependencies:
       undici-types: 6.20.0
 
@@ -952,11 +946,11 @@ snapshots:
 
   '@types/ws@7.4.7':
     dependencies:
-      '@types/node': 22.10.3
+      '@types/node': 22.10.4
 
   '@types/ws@8.5.13':
     dependencies:
-      '@types/node': 22.10.3
+      '@types/node': 22.10.4
 
   JSONStream@1.3.5:
     dependencies:
@@ -1133,9 +1127,9 @@ snapshots:
 
   get-caller-file@2.0.5: {}
 
-  grammy@1.33.0:
+  grammy@1.34.0:
     dependencies:
-      '@grammyjs/types': 3.17.0
+      '@grammyjs/types': 3.18.0
       abort-controller: 3.0.0
       debug: 4.4.0
       node-fetch: 2.7.0
@@ -1235,7 +1229,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 22.10.3
+      '@types/node': 22.10.4
       long: 5.2.3
 
   proxy-from-env@1.1.0: {}
@@ -1286,14 +1280,14 @@ snapshots:
 
   tr46@0.0.3: {}
 
-  ts-node@10.9.2(@types/node@22.10.3)(typescript@5.7.2):
+  ts-node@10.9.2(@types/node@22.10.4)(typescript@5.7.2):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       '@tsconfig/node10': 1.0.11
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.4
-      '@types/node': 22.10.3
+      '@types/node': 22.10.4
       acorn: 8.14.0
       acorn-walk: 8.3.4
       arg: 4.1.3
