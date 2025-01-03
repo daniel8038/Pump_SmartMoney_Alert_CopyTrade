@@ -16,7 +16,8 @@ const client = new TwitterApi({
 
 const twitterBearer = new TwitterApi(TWITTER_BEARER_TOKEN);
 const searchClient = twitterBearer.readOnly;
-
+// 这里只是示例  这里会消耗太多的 推特Api 额度
+// 可以单开一个服务 使用 puppeteer 爬取 推特信息  交给 openai 整理
 async function searchLatestTweet(queryKey: string): Promise<any> {
   try {
     console.log(queryKey);
